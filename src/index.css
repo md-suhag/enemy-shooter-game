@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap');
+
+:root {
+  --neon-blue: #00f3ff;
+  --neon-pink: #ff00ea;
+  --dark-bg: #0b0f19;
+  --text-primary: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stunning neon UI elements */
+.game-container {
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/background.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: repeat-y;
+  box-shadow: 0 0 50px rgba(0, 243, 255, 0.2), 0 0 100px rgba(255, 0, 234, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  /* Animating background to simulate movement later via inline styles if needed, or CSS */
+  animation: bgScroll 10s linear infinite;
+}
+
+@keyframes bgScroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+.hud-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(11, 15, 25, 0.9) 0%, transparent 100%);
+  z-index: 10;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.score-display {
+  color: #fff;
+}
+
+.lives-display {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.1);
+  padding: 5px 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Removing black backgrounds from AI generated assets by using screen blend mode,
+   or just mapping them to standard objects if they already have transparency */
+.sprite {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  /* Since we generated with black bg: */
+  mix-blend-mode: screen; 
+}
+
+.player-ship {
+  background-image: url('/player.png');
+  /* Added some subtle glowing animation to the ship */
+  filter: drop-shadow(0 0 10px var(--neon-blue));
+}
+
+.enemy-ship {
+  background-image: url('/enemy.png');
+  filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+.bullet {
+  position: absolute;
+  background: linear-gradient(to top, var(--neon-pink), rgba(255, 0, 234, 0));
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.start-screen, .game-over-screen {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  text-align: center;
+}
+
+.start-screen h1, .game-over-screen h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(var(--neon-blue), var(--neon-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  filter: drop-shadow(0 0 15px rgba(0,243,255,0.4));
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--neon-blue);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 15px 40px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2) inset, 0 0 20px rgba(0, 243, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background: var(--neon-blue);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px var(--neon-blue);
+  transform: scale(1.05);
+}
